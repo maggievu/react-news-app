@@ -32,9 +32,10 @@ class Navigation extends Component {
   render() {
     return (
       <BottomNavigation
-        onChange={this.handleChange}
-        showLabels
+        value={this.state.value}
         className={this.props.classes.root}
+        showLabels
+        onChange={this.handleChange}
       >
         <BottomNavigationAction label="USA" value="us" className={this.props.classes.label} />
         <BottomNavigationAction label="Canada" value="ca" className={this.props.classes.label} />
@@ -51,3 +52,4 @@ Navigation.propTypes = {
 };
 
 export default withStyles(styles)(Navigation)
+// export default Navigation

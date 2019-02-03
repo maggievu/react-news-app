@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+
 import Form from './components/Form'
 import Article from './components/Article'
 import Navigation from './components/Navigation'
@@ -15,6 +17,7 @@ class App extends Component {
     status: null,
     totalResults: null,
     articles: [],
+    success: false,
     error: null
   }
 
@@ -28,39 +31,41 @@ class App extends Component {
     
     const url = `https://newsapi.org/v2/top-headlines?q=${keyword}&country=${country}&apiKey=${API_KEY}`
     console.log(url)
-    const api_call = await fetch(url)
-    const data = await api_call.json()
 
-    if (keyword && data.totalResults !== 0 && data.status === 'ok') {
+    await axios.get(url)
+      .then(json => json.data)
+      .then(data => {
+        this.setState({
+          status: data.status,
+          totalResults: data.totalResults,
+          articles: data.articles,
+          success: false,
+          error: data.status.message
+        })
+      })
+      .catch(error => {
+        this.setState({ error: error })
+      })
+
+    // const api_call = await fetch(url)
+    // const data = await api_call.json()
+
+    if (this.state.totalResults !== 0) {
       this.setState({
-        status: data.status,
-        totalResults: data.totalResults,
-        articles: data.articles,
-        error: null
+        success: true
+      })
+    } else {
+      this.setState({
+        error: `Cound not find any news about "${keyword}" in country code "${country}".`,
       })
     }
     
-    if (country && data.totalResults !== 0 && data.status === 'ok') {
+    if (!keyword && !country) {
       this.setState({
-        status: data.status,
-        totalResults: data.totalResults,
-        articles: data.articles,
-        error: null
-      })
-    } else if (country && data.status === 'ok') {
-      this.setState({
-        error: `Cound not find any news about ${keyword} in ${country}.`,
-      })
-    } else if (!country && !keyword) {
-      this.setState({
+        success: false,
         error: 'Missing a keyword!'
       })
-    } else if (data.status === 'error') {
-      this.setState({
-        error: data.status.message
-      })
     }
-    
   }
   
   // Handles changes from Search button (keyword based)
@@ -76,32 +81,37 @@ class App extends Component {
     
     const url = `https://newsapi.org/v2/top-headlines?q=${keyword}&country=${country}&apiKey=${API_KEY}`
     console.log(url)
-    const api_call = await fetch(url)
-    const data = await api_call.json()
-    
-    if (keyword && data.totalResults !==0 && data.status === 'ok') {
-      this.setState({
-        status: data.status,
-        totalResults: data.totalResults,
-        articles: data.articles,
-        error: null
+
+    await axios.get(url)
+      .then(json => json.data)
+      .then(data => {
+        this.setState({
+          status: data.status,
+          totalResults: data.totalResults,
+          articles: data.articles,
+          success: false,
+          error: data.status.message
+        })
       })
-    } else if (keyword && data.status === 'ok') {
-      this.setState({
-        error: `Cound not find any news about ${keyword}.`,
+      .catch(error => {
+        this.setState({ error: error })
       })
-    } else if (!keyword) {
+
+    if (this.state.totalResults !==0) {
       this.setState({
-        country: '',
-        error: 'Missing a keyword!'
-      })
-    } else if (data.status === 'error') {
-      this.setState({
-        error: data.status.message
+        success: true,
       })
     } else {
       this.setState({
-        error: 'Something smoky and fishy...'
+        error: `Cound not find any news about ${keyword}.`,
+      })
+    }
+
+    if (!keyword) {
+      this.setState({
+        country: '',
+        success: false,
+        error: 'Missing a keyword!'
       })
     }
 
@@ -119,11 +129,12 @@ class App extends Component {
               onChange={this.handleOnChange} 
             />
             <div className="article-section">
-              {this.state.error && <p>{this.state.error}</p>}
+              {!this.state.success && <p style={{textAlign: 'center'}}>{this.state.error}</p>}
 
-              {!this.state.error && this.state.articles.slice(0, 3).map(article => {
+              {this.state.success && this.state.articles.slice(0, 10).map((article, id) => {
                 return (
                   <Article
+                    key={id}
                     source={article.source.name}
                     author={article.author}
                     title={article.title}
@@ -144,4 +155,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App
