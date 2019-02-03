@@ -54,9 +54,13 @@ class App extends Component {
       this.setState({
         success: true
       })
-    } else {
+    } else if (country !== '') {
       this.setState({
         error: `Cound not find any news about "${keyword}" in country code "${country}".`,
+      })
+    } else {
+      this.setState({
+        error: `Cound not find any news about "${keyword}".`,
       })
     }
     
@@ -103,7 +107,7 @@ class App extends Component {
       })
     } else {
       this.setState({
-        error: `Cound not find any news about ${keyword}.`,
+        error: `Cound not find any news about "${keyword}".`,
       })
     }
 
@@ -116,7 +120,7 @@ class App extends Component {
     }
 
   }
-  
+
   render() {
     return (
       <CssBaseline>

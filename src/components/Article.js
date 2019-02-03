@@ -14,7 +14,7 @@ const Article = (props) => (
     <h3 className='article_key'>{props.title}</h3>
     <p className='article_key'>
         <em>
-          {`${props.author}` !== 'null' && `By ${props.author}. `}
+          {props.author !== null && `By ${props.author}. `}
           From <a href={props.url}>{props.source}</a>. Published at {props.publishedAt}
         </em>
     </p>
