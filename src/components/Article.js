@@ -22,7 +22,7 @@ const Article = (props) => (
       {props.content}
     </p>
     <p className='article_key'>
-        <em>{`${props.description}` !== '' && `Description: ${props.description}`}</em>
+        <em>{props.description !== '' && `Description: ${props.description}`}</em>
     </p>
   </Grid>
 
