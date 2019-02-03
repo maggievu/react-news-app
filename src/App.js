@@ -14,11 +14,11 @@ class App extends Component {
   state = {
     keyword: '',
     country: '',
-    status: null,
-    totalResults: null,
+    status: '',
+    totalResults: 0,
     articles: [],
     success: false,
-    error: null
+    error: null,
   }
 
   // Handles changes from Navigation Action (country-based)
@@ -39,12 +39,13 @@ class App extends Component {
           status: data.status,
           totalResults: data.totalResults,
           articles: data.articles,
-          success: false,
           error: data.status.message
         })
       })
       .catch(error => {
-        this.setState({ error: error })
+        if (error !== null) {
+          this.setState({ error: error.response.status })
+        }
       })
 
     // const api_call = await fetch(url)
@@ -52,10 +53,12 @@ class App extends Component {
 
     if (this.state.totalResults !== 0) {
       this.setState({
-        success: true
+        success: true,
+        error: ''
       })
     } else if (country !== '') {
       this.setState({
+        success: false,
         error: `Cound not find any news about "${keyword}" in country code "${country}".`,
       })
     } else {
@@ -98,7 +101,7 @@ class App extends Component {
         })
       })
       .catch(error => {
-        this.setState({ error: error })
+        this.setState({ error: error.response.status })
       })
 
     if (this.state.totalResults !==0) {
