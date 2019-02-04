@@ -10,11 +10,11 @@ const styles = theme => ({
     // backgroundColor: theme.palette.background.paper,
   },
   tabsRoot: {
-    // borderBottom: '1px solid #e8e8e8',
     flexFlow: 'row wrap',
+    // borderBottom: '1px solid #e8e8e8',
   },
   tabsIndicator: {
-    backgroundColor: '#0097a7',
+    backgroundColor: '#26c6da',
   },
   tabRoot: {
     // textTransform: 'initial',
@@ -37,15 +37,15 @@ const styles = theme => ({
       '"Segoe UI Symbol"',
     ].join(','),
     '&:hover': {
-      color: '#0097a7',
+      color: '#26c6da',
       opacity: 1,
     },
     '&$tabSelected': {
-      color: '#0097a7',
+      color: '#26c6da',
       fontWeight: theme.typography.fontWeightMedium,
     },
     '&:focus': {
-      color: '#0097a7',
+      color: '#26c6da',
     },
   },
   tabSelected: {},

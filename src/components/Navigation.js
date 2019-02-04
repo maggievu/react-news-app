@@ -4,18 +4,28 @@ import { withStyles } from '@material-ui/core/styles'
 import BottomNavigation from '@material-ui/core/BottomNavigation'
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 
-const styles = {
+const styles = () => ({
   root: {
     width: '100%',
+    height: 'auto',
+    flexFlow: 'row wrap',
+  },
+  actionRoot: {
+    backgroundColor: 'rgba(0,0,0,.1)',
+    border: '1px solid #fff',
+    flex: '1 0 100px',
+    maxWidth: 'initial',
+    textTransform: 'uppercase',
   },
   label: {
+    padding: '1rem 0',
     fontSize: '14px',
-    backgroundColor: 'rgba(0,0,0,.1)',
-    maxWidth: 'initial',
-    marginLeft: '1px',
-    marginRight: '1px',
+  },
+  selected: {
+    color: '#fff',
+    backgroundColor: '#26c6da',
   }
-};
+})
 
 class Navigation extends Component {
   state = {
@@ -33,17 +43,17 @@ class Navigation extends Component {
     return (
       <BottomNavigation
         value={this.state.value}
-        className={this.props.classes.root}
+        classes={{ root: this.props.classes.root }}
         showLabels
         onChange={this.handleChange}
       >
-        <BottomNavigationAction label="USA" value="us" className={this.props.classes.label} />
-        <BottomNavigationAction label="Canada" value="ca" className={this.props.classes.label} />
-        <BottomNavigationAction label="Search Results" value="" className={this.props.classes.label} />
-        <BottomNavigationAction label="France" value="fr" className={this.props.classes.label} />
-        <BottomNavigationAction label="Belgium" value="be" className={this.props.classes.label} />
+        <BottomNavigationAction label="USA" value="us" classes={{ root: this.props.classes.actionRoot, label: this.props.classes.label, selected: this.props.classes.selected }} />
+        <BottomNavigationAction label="Canada" value="ca" classes={{ root: this.props.classes.actionRoot, label: this.props.classes.label, selected: this.props.classes.selected }} />
+        <BottomNavigationAction label="Search Results" value="" classes={{ root: this.props.classes.actionRoot, label: this.props.classes.label, selected: this.props.classes.selected }} />
+        <BottomNavigationAction label="France" value="fr" classes={{ root: this.props.classes.actionRoot, label: this.props.classes.label, selected: this.props.classes.selected }} />
+        <BottomNavigationAction label="Belgium" value="be" classes={{ root: this.props.classes.actionRoot, label: this.props.classes.label, selected: this.props.classes.selected }} />
       </BottomNavigation>
-    );
+    )
   }
 }
 

@@ -11,7 +11,11 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit,
-    width: "100%"
+    width: "100%",
+    backgroundColor: ['#26c6da'].join(','),
+    '&:hover': {
+      backgroundColor: '#26c6da',
+    }
   }
 })
 
@@ -22,7 +26,7 @@ const Form = (props) => {
         <Grid item xs={9}>
           <TextField
             className={props.classes.textField}
-            label="Keyword"
+            label="Search by keyword"
             margin="normal"
             name="keyword"
             type="search"

@@ -4,6 +4,7 @@ import axios from 'axios'
 import Form from './components/Form'
 import Article from './components/Article'
 import Navigation from './components/Navigation'
+import Footer from './components/Footer'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 import './App.css'
@@ -130,10 +131,11 @@ class App extends Component {
 
         <div className="wrapper">
           <div className="main">
-            <h1 className="site-title">Welcome to Maggie's daily news feed!!</h1>
+            <h1 className="site-title">Daily News by Maggie </h1>
             <Form getNews={this.getNews} />
-            <Navigation 
-              onChange={this.handleOnChange} 
+            <Navigation
+              value={this.props.value}
+              onChange={this.handleOnChange}
             />
             <div className="article-section">
               {!this.state.success && <p style={{textAlign: 'center'}}>{this.state.error}</p>}
@@ -155,6 +157,7 @@ class App extends Component {
               })}
             </div>
           </div>
+          <Footer />
         </div>
 
       </CssBaseline>
