@@ -47,7 +47,8 @@ img {
     padding-left: 3%;
     padding-right: 3%;
   }
-  .jss184:nth-child(3) {
+  
+  button[class$='184']:nth-child(3) {
     order: -1;
     flex-basis: 100%;
   }
