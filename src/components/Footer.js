@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 const Footer = () => (
   <footer style={{textAlign: 'center', marginTop: '1rem'}}>

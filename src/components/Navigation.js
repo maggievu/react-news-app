@@ -13,7 +13,7 @@ const styles = () => ({
   actionRoot: {
     backgroundColor: 'rgba(0,0,0,.1)',
     border: '1px solid #fff',
-    flex: '1 0 100px',
+    flex: '1 0 120px',
     maxWidth: 'initial',
     textTransform: 'uppercase',
   },
