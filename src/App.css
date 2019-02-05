@@ -48,8 +48,15 @@ img {
     padding-right: 3%;
   }
   
-  button[class$='184']:nth-child(3) {
-    order: -1;
+    /* For development site */
+    .Navigation-actionRoot-184:nth-child(3) {
+      order: -1 !important;
+      flex-basis: 100%;
+    }
+  
+  /* For production site */
+  .jss184:nth-child(3) {
+    order: -1 !important;
     flex-basis: 100%;
   }
 }
